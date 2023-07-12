@@ -13,7 +13,6 @@ export const NavbarSettings = () => {
           propKey="links"
           label="Links"
           type="list"
-          maxItems={5}
         >
           <ToolbarItem propKey="label" label="Label" type="text" />
           <ToolbarItem propKey="url" label="URL" type="text" />

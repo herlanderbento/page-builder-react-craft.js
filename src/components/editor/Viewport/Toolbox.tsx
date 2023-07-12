@@ -3,10 +3,10 @@ import { Tooltip } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 
-import ButtonSvg from "../../../public/icons/toolbox/button.svg";
-import SquareSvg from "../../../public/icons/toolbox/rectangle.svg";
-import TypeSvg from "../../../public/icons/toolbox/text.svg";
-import YoutubeSvg from "../../../public/icons/toolbox/video-line.svg";
+import ButtonSvg from "../../../../public/icons/toolbox/button.svg";
+import SquareSvg from "../../../../public/icons/toolbox/rectangle.svg";
+import TypeSvg from "../../../../public/icons/toolbox/text.svg";
+import YoutubeSvg from "../../../../public/icons/toolbox/video-line.svg";
 
 import { Button } from "../../selectors/Button";
 import { Container } from "../../selectors/Container";
@@ -17,7 +17,7 @@ import { Textarea } from "../../selectors/Textarea";
 import { Image } from "../../selectors/Image";
 import { Form } from "../../selectors/Form";
 import { Card } from "../../selectors/Card";
-import { Navbar } from '../../selectors/Navbar';
+import { Navbar } from "../../selectors/Navbar";
 
 const ToolboxDiv = styled.div<{ enabled: boolean }>`
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);

@@ -1,11 +1,13 @@
 import { TextField, makeStyles, InputAdornment } from '@material-ui/core';
-import React, { useEffect ,useState} from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { ChromePicker } from 'react-color';
 
 const useStyles = makeStyles({
   root: {
     padding: 0,
     width: '100%',
+    // background:"#efeff1",
     borderRadius: '100px',
     border: 'none',
     margin: 0,
@@ -20,7 +22,11 @@ const useStyles = makeStyles({
     paddingBottom: '8px',
     paddingTop: '8px',
     margin: 0,
-  }
+  }, // a style rule
+  // notchedOutline: {
+  //   borderColor:'transparent',
+  //   borderRadius: "100px"
+  // }
 });
 
 const useLabelStyles = makeStyles({
@@ -28,14 +34,14 @@ const useLabelStyles = makeStyles({
     color: 'rgb(128,128,128)',
   },
   formControl: {
-    fontSize: '12px',
+    fontSize: '18px',
     borderRadius: '100px',
     paddingLeft: '0px',
     paddingTop: '3px',
     marginBottom: '3px',
     position: 'relative',
     left: '-12px',
-  },
+  }, // a style rule
 });
 
 export type ToolbarTextInputProps = {

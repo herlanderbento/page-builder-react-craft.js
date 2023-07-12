@@ -70,16 +70,13 @@ export type ToolbarItemProps = {
   children?: React.ReactNode;
   type: string;
   onChange?: (value: any) => any;
-  maxItems?: number
 };
-
 export const ToolbarItem = ({
   full = false,
   propKey,
   type,
   onChange,
   index,
-  maxItems,
   ...props
 }: ToolbarItemProps) => {
   const {
@@ -90,17 +87,6 @@ export const ToolbarItem = ({
   }));
   const value = Array.isArray(propValue) ? propValue[index] : propValue;
 
-  const handleChange = (value: any) => {
-    setProp((props: any) => {
-      if (Array.isArray(propValue)) {
-        const updatedProps = [...props[propKey]];
-        updatedProps[index] = onChange ? onChange(value) : value;
-        return { ...props, [propKey]: updatedProps };
-      }
-      return { ...props, [propKey]: onChange ? onChange(value) : value };
-    }, 500);
-  };
-
   return (
     <Grid item xs={full ? 12 : 6}>
       <div className="mb-2">
@@ -109,7 +95,15 @@ export const ToolbarItem = ({
             {...props}
             type={type}
             value={value}
-            onChange={(value) => handleChange(value)}
+            onChange={(value) => {
+              setProp((props: any) => {
+                if (Array.isArray(propValue)) {
+                  props[propKey][index] = onChange ? onChange(value) : value;
+                } else {
+                  props[propKey] = onChange ? onChange(value) : value;
+                }
+              }, 500);
+            }}
           />
         ) : type === 'slider' ? (
           <>
@@ -118,7 +112,19 @@ export const ToolbarItem = ({
             ) : null}
             <SliderStyled
               value={parseInt(value) || 0}
-              onChange={(_, value: number) => handleChange(value)}
+              onChange={
+                ((_, value: number) => {
+                  setProp((props: any) => {
+                    if (Array.isArray(propValue)) {
+                      props[propKey][index] = onChange
+                        ? onChange(value)
+                        : value;
+                    } else {
+                      props[propKey] = onChange ? onChange(value) : value;
+                    }
+                  }, 1000);
+                }) as any
+              }
             />
           </>
         ) : type === 'radio' ? (
@@ -130,7 +136,9 @@ export const ToolbarItem = ({
               value={value || 0}
               onChange={(e) => {
                 const value = e.target.value;
-                handleChange(value);
+                setProp((props: any) => {
+                  props[propKey] = onChange ? onChange(value) : value;
+                });
               }}
             >
               {props.children}
@@ -139,7 +147,12 @@ export const ToolbarItem = ({
         ) : type === 'select' ? (
           <ToolbarDropdown
             value={value || ''}
-            onChange={(value) => handleChange(value)}
+            onChange={(value) =>
+              setProp(
+                (props: any) =>
+                  (props[propKey] = onChange ? onChange(value) : value)
+              )
+            }
             {...props}
           />
         ) : null}

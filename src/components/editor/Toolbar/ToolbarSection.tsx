@@ -61,7 +61,7 @@ export const ToolbarSection = ({ title, props, summary, children }: any) => {
             </Grid>
             {summary && props ? (
               <Grid item xs={8}>
-                <h5 className="text-light-gray-2 text-right text-dark-blue">
+                <h5 className="text-light-gray-2 text-sm text-right text-dark-blue">
                   {summary(
                     props.reduce((acc: any, key: any) => {
                       acc[key] = nodeProps[key];
